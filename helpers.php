@@ -2,6 +2,40 @@
 
 require_once('Git.php/Git.php');
 
+
+/**
+ * Compose Commit message for content repository
+ * 
+ * @param string $commitMessage
+ * @return false
+ */
+function gitCommitContent($commitMessage)
+{
+	gitCommit($commitMessage,"../content");
+}
+
+/**
+ * Compose Commit message for accounts repository
+ * 
+ * @param string $commitMessage
+ * @return false
+ */
+function gitCommitAccounts($commitMessage)
+{
+	gitCommit($commitMessage,"../site/accounts");
+}
+
+/**
+ * Compose Commit message for avatars repository
+ * 
+ * @param string $commitMessage
+ * @return false
+ */
+function gitCommitAvatars($commitMessage)
+{
+	gitCommit($commitMessage,"../assets/avatars");
+}
+
 /**
  * Compose Commit message, appends " by Username"
  *
@@ -9,7 +43,7 @@ require_once('Git.php/Git.php');
  *
  * @return false
  */
-function gitCommit($commitMessage)
+function gitCommit($commitMessage, $repoPath)
 {
     $debugMode = c::get('debug', false);
     $branch = c::get('gcapc-branch', 'master');
@@ -29,7 +63,7 @@ function gitCommit($commitMessage)
         Git::set_bin($gitBin);
     }
 
-    $repo = Git::open('../content');
+    $repo = Git::open($repoPath);
 
     if ($debugMode) {
         if (!$repo->test_git()) {

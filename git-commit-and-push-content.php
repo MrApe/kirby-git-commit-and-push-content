@@ -8,7 +8,6 @@ kirby()->hook('panel.page.create', function ($page) {
 	gitCommitContent('create(page): ' . $page->uri());
 });
 kirby()->hook('panel.page.update', function ($page) {
-    echo "Saving!";
     gitCommitContent('update(page): ' . $page->uri());
 });
 kirby()->hook('panel.page.delete', function ($page) {
